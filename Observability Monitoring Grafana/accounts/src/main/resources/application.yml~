@@ -1,0 +1,106 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "accounts"
+  profiles:
+    active: "prod"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName : org.h2.Driver
+    username: sa
+    password : ''
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  cloud:
+   openfeign:
+    circuitbreaker:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure: # here all the endpoints of actuator are exposed for our accounts service
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes: #INFO : Enabling probes ensures the system actively verifies whether the application is operational and ready to serve requests
+        enabled: true
+    shutdown:
+      enabled: true
+  info:
+   env:
+     enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+
+endpoints:
+  shutdown:
+    enabled: true
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+info:
+  app:
+    name: "accounts"
+    description: "Accounts Application"
+    version: "1.0.0"
+
+logging:
+  level:
+    com:
+     springwithaarafa:
+       accounts: DEBUG
+  pattern: #Distributed tracing, 
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000
+
+
+resilience4j.retry:
+  configs:
+    default:
+      maxAttempts: 3
+      waitDuration: 500
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      ignoreExceptions: # we dont need to mentionne this if retryExceptions is mentionned
+        - java.lang.NullPointerException
+      retryExceptions:
+        - java.util.concurrent.TimeoutException
+
+resilience4j.ratelimiter:
+  configs:
+    default:
+      timeoutDuration: 1000 #Specifies how long a thread or process will wait for a permit to proceed if the rate limiter is full.
+      limitRefreshPeriod: 5000 #Defines the time interval for refreshing the rate limiter's permits.
+      limitForPeriod: 1 #Specifies the number of requests allowed in each limitRefreshPeriod
+      #Permits :: refer to the "tokens" " that allow a request or operation to proceed.

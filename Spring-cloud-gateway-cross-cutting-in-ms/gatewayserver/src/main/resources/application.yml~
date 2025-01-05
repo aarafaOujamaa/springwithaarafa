@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: "gatewayserver"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  cloud:
+    gateway:
+      discovery: #telliing to my gateway, please connect with the discovery server which is eureka server
+        locator: # && locate all details about the microservices.
+          enabled: false # disbaled default configuration which my gateway fetch from the eureka server | Routes ms api(s)
+          # for more details check http://localhost:8072/actuator/gateway/routes
+          lowerCaseServiceId: true #ACCEPT SERVICE NAME IN LOWER CASE
+
+management:
+  endpoints:
+    web:
+      exposure: # here all the endpoints of actuator are exposed for our gatewayserver service
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+
+info:
+  app:
+    name: "gatewayserver"
+    description: "Gatewayserver Application"
+    version: "1.0.0"
+
+
+logging:
+  level:
+    com:
+      springwithaarafa:
+        gatewayserver: DEBUG
+

@@ -1,0 +1,86 @@
+services:
+  rabbit:
+    image: rabbitmq:3.13-management
+    hostname: rabbitmq
+    ports:
+      - "5673:5673"
+      - "15673:15673"
+    healthcheck:
+      # Executes a health check using RabbitMQ's diagnostics tool to verify port connectivity.
+      test: rabbitmq-diagnostics check_port_connectivity
+      # Specifies the interval between health check attempts (every 10 seconds).
+      interval: 10s
+      # Specifies the maximum time a single health check attempt can take (5 seconds).
+      timeout: 5s
+      # Defines the number of retries allowed before marking the service as unhealthy.
+      retries: 10
+      # Sets a grace period at the start when the health check is not performed
+      # to allow the service to initialize.
+      start_period: 5s
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  configserver:
+    image: "aarafahub/configserver:s6"
+    container_name: configserver-ms
+    ports:
+      - "8071:8071"
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+
+  accounts:
+    image: "aarafahub/accounts:s6"
+    container_name: accounts-ms
+    ports:
+      - "8080:8080"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    environment:
+      SPRING_APPLICATION_NAME: "accounts"
+
+  loans:
+    image: "aarafahub/loans:s6"
+    container_name: loans-ms
+    ports:
+      - "8090:8090"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+
+  cards:
+    image: "aarafahub/cards:s6"
+    container_name: cards-ms
+    ports:
+      - "9000:9000"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+
+networks:
+  springwithaarafa:
+    driver: "bridge"

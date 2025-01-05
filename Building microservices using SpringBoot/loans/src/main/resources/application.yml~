@@ -1,0 +1,16 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: loans-service
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: ''
+  jpa:
+    database: 
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+

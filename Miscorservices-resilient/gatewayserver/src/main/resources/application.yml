@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: "gatewayserver"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  cloud:
+    gateway:
+      discovery: #telliing to my gateway, please connect with the discovery server which is eureka server
+        locator: # && locate all details about the microservices.
+          enabled: false # disbaled default configuration which my gateway fetch from the eureka server | Routes ms api(s)
+          # for more details check http://localhost:8072/actuator/gateway/routes
+          lowerCaseServiceId: true #ACCEPT SERVICE NAME IN LOWER CASE
+    httpclient:
+      connect-timeout: 10000 # in milliseconds
+      response-timeout: 200s
+
+management:
+  endpoints:
+    web:
+      exposure: # here all the endpoints of actuator are exposed for our gatewayserver service
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "gatewayserver"
+    description: "Gatewayserver Application"
+    version: "1.0.0"
+
+logging:
+  level:
+    com:
+      springwithaarafa:
+       gatewayserver: DEBUG
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10 # we communicate to circuit breaker pattern on how many requests it has to initialy monitor before it tries to change the status from close to open
+      permittedNumberOfCallsInHalfOpenState: 2 # permit 2 requests in half OPEN-HALF state, for decide whether to go back to the open/close state
+      failureRateThreshold: 50 #if at least '50 %' of my request are failed, then my circuit breaker pattern can move to the open state from the closed state to open state
+      waitDurationInOpenState: 10000 # in milliseconds, in this configuration , my circuit breaker pattern, it is going to wait 10s whenver it tries to move to the half open state and allow the partial traffic

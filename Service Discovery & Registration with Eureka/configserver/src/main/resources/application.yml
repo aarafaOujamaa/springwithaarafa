@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: "configserver"
+  profiles:
+     # active: native
+     active: git
+  cloud:
+    config:
+      server:
+      #native:
+           # search-locations: "classpath:/config"
+           # read from C:/config - file System location
+           #search-locations: "file:///C://config"
+       git:
+          uri : "https://github.com/aarafaOujamaa/aarafaoujamaa-config.git"
+          default-label: main
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+
+encrypt: # create rondom complex key, to encrypte or decrypte properties
+  key: "12345678901234567890123456789012"
+server:
+  port: 8071
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        #INFO : actuator/busrefresh -> can trigger a refresh event
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes: #INFO : Enabling probes ensures the system actively verifies whether the application is operational and ready to serve requests
+        enabled: true
