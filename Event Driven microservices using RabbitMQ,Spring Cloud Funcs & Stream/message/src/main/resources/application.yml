@@ -1,0 +1,25 @@
+server:
+  port: 9010
+
+spring:
+ application:
+  name: "message"
+ cloud:
+   function:
+     #function names, which is email followed by pipe symbol
+     # compose both these two functions build two into a single logical unit -> http://localhost:9010/emailsms
+     definition: email|sms
+   stream:
+    bindings:
+     emailsms-in-0: # Input binding for the 'emailsms' consumer
+      destination: send-communication #Queue name
+      group: ${spring.application.name} # Application name as the consumer group
+     emailsms-out-0: ## Output binding for the 'emailsms' producer ::   -> functionName-output binding-start index value
+      destination: communication-sent #Exchnage name  for outgoing messages
+ rabbitmq: #Now it is capable of receviving the messages from a queue with the name "send-communication" inside rabbitmq
+   #need to update the accounts microservice to send the messages and push them into rabbitmq
+   host: localhost # RabbitMQ server host
+   port: 5672 # Default RabbitMQ port (if not default, replace it)
+   username: guest # RabbitMQ username (default: guest, replace if different)
+   password: guest # RabbitMQ password (default: guest, replace if different)
+   connection-timeout: 10s
