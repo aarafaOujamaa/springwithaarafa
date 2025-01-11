@@ -1,0 +1,22 @@
+server:
+  port: 9010
+
+spring:
+ application:
+  name: "message"
+ cloud:
+   function:
+     #function names, which is email followed by pipe symbol
+     # compose both these two functions build two into a single logical unit -> http://localhost:9010/emailsms
+     definition: email|sms
+   stream:
+    bindings:
+     emailsms-in-0:
+      destination: send-communication
+      group: ${spring.application.name}
+     emailsms-out-0:
+      destination: communication-sent
+    kafka:
+     binder:
+      brokers:
+       - localhost:9092
