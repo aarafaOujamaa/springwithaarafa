@@ -59,10 +59,10 @@ Spring Cloud Stream équipe une application Spring Boot d'un destination binder 
 Une liaison de destination peut fonctionner soit comme un canal d’entrée, soit comme un canal de sortie. Par défaut, Spring Cloud Stream associe chaque liaison, à la fois en entrée et en sortie, à un échange au sein de RabbitMQ (plus précisément, un échange de type "topic"). De plus, pour chaque liaison d’entrée, il lie une file d’attente à l’échange associé. Cette file d’attente sert de source à partir de laquelle les consommateurs reçoivent et traitent les événements. Cette configuration fournit l'infrastructure nécessaire pour mettre en œuvre des architectures pilotées par les événements basées sur le modèle pub/sub.
 Using RabbitMq :
 ![image](https://github.com/user-attachments/assets/fb57429f-5e34-4ec2-9132-945f2391a94b)
-
 ![image](https://github.com/user-attachments/assets/da637817-b288-4793-864c-79aa143ed1d0)
 
 Using Kafka Apache :
+![image](https://github.com/user-attachments/assets/cbd4b31a-ed0f-413a-9c39-0d7a4e50e2e2)
 ![image](https://github.com/user-attachments/assets/4c0417cb-d254-40f8-9b7a-e2fc0738f3b2)
 
 
