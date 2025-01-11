@@ -51,6 +51,20 @@ Ce projet explore la conception, le développement, et la gestion des applicatio
 ![DockerHub](https://github.com/user-attachments/assets/e7ff1be9-35c3-4daf-8dce-fc07508095aa)
 ![Docker-Desktop](https://github.com/user-attachments/assets/b683342c-d070-4b3a-a4e8-224b148ddddf)
 ![image](https://github.com/user-attachments/assets/1ca20596-bdb5-4d33-823e-4ab3166ea7d2)
+![image](https://github.com/user-attachments/assets/2f6726c9-8441-4bd3-95a8-7ceabd983780)
+
+ 
+Spring Cloud Stream équipe une application Spring Boot d'un destination binder (liaison de destination) qui s'intègre de manière transparente à un système de messagerie externe(kafka, RabbitMq..). Ce binder prend en charge l’établissement de canaux de communication entre les producteurs et les consommateurs de l’application et les entités du système de messagerie (comme les échanges et les files d’attente dans le cas de RabbitMQ). Ces canaux de communication, connus sous le nom de liaisons de destination, servent de connexions entre les applications et les brokers.
+
+Une liaison de destination peut fonctionner soit comme un canal d’entrée, soit comme un canal de sortie. Par défaut, Spring Cloud Stream associe chaque liaison, à la fois en entrée et en sortie, à un échange au sein de RabbitMQ (plus précisément, un échange de type "topic"). De plus, pour chaque liaison d’entrée, il lie une file d’attente à l’échange associé. Cette file d’attente sert de source à partir de laquelle les consommateurs reçoivent et traitent les événements. Cette configuration fournit l'infrastructure nécessaire pour mettre en œuvre des architectures pilotées par les événements basées sur le modèle pub/sub.
+Using RabbitMq :
+![image](https://github.com/user-attachments/assets/fb57429f-5e34-4ec2-9132-945f2391a94b)
+![image](https://github.com/user-attachments/assets/da637817-b288-4793-864c-79aa143ed1d0)
+
+Using Kafka Apache :
+![image](https://github.com/user-attachments/assets/cbd4b31a-ed0f-413a-9c39-0d7a4e50e2e2)
+![image](https://github.com/user-attachments/assets/4c0417cb-d254-40f8-9b7a-e2fc0738f3b2)
+
 
 
 
