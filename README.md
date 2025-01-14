@@ -63,6 +63,7 @@ Using RabbitMq :
 
 Using Kafka Apache :
 ![image](https://github.com/user-attachments/assets/cbd4b31a-ed0f-413a-9c39-0d7a4e50e2e2)
+
 ![image](https://github.com/user-attachments/assets/4c0417cb-d254-40f8-9b7a-e2fc0738f3b2)
 
 Kubernetes/K8s Cluster:
@@ -76,11 +77,11 @@ Manifest file(s)
 
 Le type de service d'un cluster se réfère généralement au type de service dans Kubernetes, qui définit comment le service est exposé au réseau. Il existe quatre types de services principaux dans Kubernetes :
 
-**ClusterIP (par défaut)** :
+**ClusterIP** :
 
 - Expose le service uniquement à l'intérieur du cluster.
 - Ce type est utilisé pour la communication interne entre les applications fonctionnant dans le cluster.
-- Exemple d'utilisation : Communication entre un frontend et un backend au sein du cluster.
+- Exemple d'utilisation : Communication entre un frontend et un backend au sein du cluster "
 
 **NodePort** :
 
