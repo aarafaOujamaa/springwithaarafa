@@ -63,10 +63,11 @@ Using RabbitMq :
 
 Using Kafka Apache :
 ![image](https://github.com/user-attachments/assets/cbd4b31a-ed0f-413a-9c39-0d7a4e50e2e2)
-![image](https://github.com/user-attachments/assets/4c0417cb-d254-40f8-9b7a-e2fc0738f3b2)
 
 Kubernetes/K8s Cluster:
 Manifest file(s)
+
+![image](https://github.com/user-attachments/assets/4c0417cb-d254-40f8-9b7a-e2fc0738f3b2)
 ![image](https://github.com/user-attachments/assets/a8200aa1-0757-4259-9272-d004c8b7a569)
 
 ![image](https://github.com/user-attachments/assets/579639b8-6062-4d27-8254-97913b92630b)
