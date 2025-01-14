@@ -77,11 +77,11 @@ Manifest file(s)
 
 Le type de service d'un cluster se réfère généralement au type de service dans Kubernetes, qui définit comment le service est exposé au réseau. Il existe quatre types de services principaux dans Kubernetes :
 
-**ClusterIP (par défaut)** :
+**ClusterIP** :
 
 - Expose le service uniquement à l'intérieur du cluster.
 - Ce type est utilisé pour la communication interne entre les applications fonctionnant dans le cluster.
-- Exemple d'utilisation : Communication entre un frontend et un backend au sein du cluster.
+- Exemple d'utilisation : Communication entre un frontend et un backend au sein du cluster "
 
 **NodePort** :
 
