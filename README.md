@@ -66,28 +66,33 @@ Using Kafka Apache :
 ![image](https://github.com/user-attachments/assets/4c0417cb-d254-40f8-9b7a-e2fc0738f3b2)
 
 Kubernetes/K8s Cluster:
+Manifest file(s)
+![image](https://github.com/user-attachments/assets/a8200aa1-0757-4259-9272-d004c8b7a569)
+
 ![image](https://github.com/user-attachments/assets/579639b8-6062-4d27-8254-97913b92630b)
 ![image](https://github.com/user-attachments/assets/069995a1-c6e8-46f3-8c49-a30fb2e3005f)
 ![image](https://github.com/user-attachments/assets/db82b443-25ae-40b0-9c79-449672909768)
 ![image](https://github.com/user-attachments/assets/b700873c-43e4-44ff-a028-da3cdc635e02)
 
-The type of service of a cluster typically refers to the service type in Kubernetes, which defines how the service is exposed to the network. There are four primary service types in Kubernetes:
+Le type de service d'un cluster se réfère généralement au type de service dans Kubernetes, qui définit comment le service est exposé au réseau. Il existe quatre types de services principaux dans Kubernetes :
 
-ClusterIP (default):
+**ClusterIP (par défaut)** :
 
-Exposes the service only within the cluster.
-This type is used for internal communication between applications running in the cluster.
-Example use case: Communication between a frontend and backend within the cluster.
-NodePort:
+- Expose le service uniquement à l'intérieur du cluster.
+- Ce type est utilisé pour la communication interne entre les applications fonctionnant dans le cluster.
+- Exemple d'utilisation : Communication entre un frontend et un backend au sein du cluster.
 
-Exposes the service on a static port on each node in the cluster.
-External access can be achieved by targeting a <NodeIP>:<NodePort>.
-Example use case: Development or debugging purposes, providing a simple way to expose a service externally.
-LoadBalancer:
+**NodePort** :
 
-Exposes the service externally using a cloud provider's load balancer.
-Automatically provisions an external load balancer (if supported by the environment).
-Example use case: Production environments requiring external access with load balancing.
+- Expose le service sur un port statique sur chaque nœud du cluster.
+- Un accès externe peut être obtenu en ciblant une combinaison <NodeIP>:<NodePort>.
+- Exemple d'utilisation : Développement ou débogage, offrant un moyen simple d'exposer un service en externe.
+
+**LoadBalancer** :
+
+- Expose le service en externe en utilisant un équilibreur de charge fourni par un fournisseur de cloud.
+- Provisions automatiquement un équilibreur de charge externe (si l'environnement le prend en charge).
+- Exemple d'utilisation : Environnements de production nécessitant un accès externe avec équilibrage de charge.
 
 ![image](https://github.com/user-attachments/assets/a1b0ccdc-36be-4fc4-98ae-9d03d73f6073)
 
