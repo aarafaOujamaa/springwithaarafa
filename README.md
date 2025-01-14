@@ -71,5 +71,51 @@ Kubernetes/K8s Cluster:
 ![image](https://github.com/user-attachments/assets/db82b443-25ae-40b0-9c79-449672909768)
 ![image](https://github.com/user-attachments/assets/b700873c-43e4-44ff-a028-da3cdc635e02)
 
+The type of service of a cluster typically refers to the service type in Kubernetes, which defines how the service is exposed to the network. There are four primary service types in Kubernetes:
 
+ClusterIP (default):
 
+Exposes the service only within the cluster.
+This type is used for internal communication between applications running in the cluster.
+Example use case: Communication between a frontend and backend within the cluster.
+NodePort:
+
+Exposes the service on a static port on each node in the cluster.
+External access can be achieved by targeting a <NodeIP>:<NodePort>.
+Example use case: Development or debugging purposes, providing a simple way to expose a service externally.
+LoadBalancer:
+
+Exposes the service externally using a cloud provider's load balancer.
+Automatically provisions an external load balancer (if supported by the environment).
+Example use case: Production environments requiring external access with load balancing.
+
+![image](https://github.com/user-attachments/assets/a1b0ccdc-36be-4fc4-98ae-9d03d73f6073)
+
+http://localhost:8080/api/contact-info  -> Using : type: LoadBalancer
+{
+message: "Welcome to  accounts related weebhook - Production - API(s) ",
+contactDetails: {
+name: "Reine Aishwarya - Product Owner",
+email: "aishwarya@accounts-apis.com"
+},
+onCallSupport: [
+"(453) 392-4829",
+"(236) 203-0384"
+]
+}
+
+http://localhost:8080/api/contact-info  -> Using : type: ClusterIp
+Page not accessible 
+
+http://localhost:30860/api/contact-info  -> Using : type: NodePort 30860
+{
+message: "Welcome to  accounts related weebhook - Production - API(s) ",
+contactDetails: {
+name: "Reine Aishwarya - Product Owner",
+email: "aishwarya@accounts-apis.com"
+},
+onCallSupport: [
+"(453) 392-4829",
+"(236) 203-0384"
+]
+}
